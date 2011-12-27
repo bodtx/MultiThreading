@@ -1,0 +1,3 @@
+Demo which uses for join framework to resize images
+launch ResizeAction to use RecursiveAction
+launch ResizeTask to use RecursiveTask
