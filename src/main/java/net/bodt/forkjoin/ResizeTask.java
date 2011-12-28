@@ -41,10 +41,13 @@ public class ResizeTask extends RecursiveTask {
 		else{
 			//divide into two tasks
 			File[] fileToSearchdown = (File[]) Arrays.copyOfRange(fileToSearch, 0, fileToSearch.length/2);
-			File[] fileToSearchup = (File[]) Arrays.copyOfRange(fileToSearch, (fileToSearch.length+2-1)/2, fileToSearch.length);
+			File[] fileToSearchup = (File[]) Arrays.copyOfRange(fileToSearch, fileToSearch.length/2, fileToSearch.length);
 			
 			ResizeTask subtask = new ResizeTask(fileToSearchup);
 			subtask.fork();
+//			ResizeTask subtask2 = new ResizeTask(fileToSearchdown);
+//			subtask2.fork();
+//			filesResized.addAll((List<File>)subtask2.join());
 			filesResized.addAll((List<File>)new ResizeTask(fileToSearchdown).compute());
 			filesResized.addAll((List<File>)subtask.join());
 			return filesResized;
